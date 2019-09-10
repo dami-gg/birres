@@ -1,10 +1,13 @@
 import React from "react";
-import Header from "../src/components/header/Header";
+import Link from "next/link";
 
-const Index = () => (
-  <div>
-    <Header />
-  </div>
+import ProtectedPage from "./_protected";
+
+const IndexPage = () => (
+  <ProtectedPage>
+    <h1>Dashboard</h1>
+    <Link href="/beers">List of beers</Link>
+  </ProtectedPage>
 );
 
-export default Index;
+export default IndexPage;

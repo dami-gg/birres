@@ -4,6 +4,8 @@ import App from "next/app";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import { AuthContextProvider } from "../src/context";
+
 import theme from "../src/theme";
 
 class MyApp extends App {
@@ -21,7 +23,9 @@ class MyApp extends App {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <AuthContextProvider>
+          <Component {...pageProps} />
+        </AuthContextProvider>
       </ThemeProvider>
     );
   }
