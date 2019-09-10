@@ -1,10 +1,20 @@
 import React from "react";
+
+import { useIdentityContext } from "react-netlify-identity";
+
 import Header from "../src/components/header/Header";
+import Login from "../src/components/login/Login";
 
-const Index = () => (
-  <div>
-    <Header />
-  </div>
-);
+const IndexPage = () => {
+  const { isLoggedIn } = useIdentityContext();
 
-export default Index;
+  return (
+    <div>
+      <Header />
+
+      {isLoggedIn ? <p>Dashboard</p> : <Login />}
+    </div>
+  );
+};
+
+export default IndexPage;

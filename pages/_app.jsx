@@ -1,10 +1,14 @@
 import React from "react";
 import App from "next/app";
 
+import { IdentityContextProvider } from "react-netlify-identity";
+
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import theme from "../src/theme";
+
+const URL = "https://birres.netlify.com/";
 
 class MyApp extends App {
   componentDidMount() {
@@ -21,7 +25,9 @@ class MyApp extends App {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <IdentityContextProvider url={URL}>
+          <Component {...pageProps} />
+        </IdentityContextProvider>
       </ThemeProvider>
     );
   }
