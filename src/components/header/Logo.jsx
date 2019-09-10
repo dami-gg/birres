@@ -9,14 +9,14 @@ const useStyles = makeStyles({
   }
 });
 
-const Title = () => {
+const Logo = () => {
   const classes = useStyles();
 
   return (
-    <Typography variant="h6" className={classes.title}>
+    <Typography variant="h6" className={classes.logo}>
       Birres
     </Typography>
   );
 };
 
-export default Title;
+export default Logo;

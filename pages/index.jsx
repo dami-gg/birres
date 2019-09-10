@@ -1,9 +1,9 @@
 import React from "react";
-import Title from "../components/title/Title";
+import Header from "../src/components/header/Header";
 
 const Index = () => (
   <div>
-    <Title />
+    <Header />
   </div>
 );
 
