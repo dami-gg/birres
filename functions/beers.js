@@ -1,4 +1,4 @@
-exports.handler = async (req, res, database) => {
+exports.handler = async (req, res, user, database) => {
   let statusCode = 200;
   let response;
 

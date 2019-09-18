@@ -14,14 +14,34 @@ admin.initializeApp({
 
 const database = admin.database();
 
-exports.users = functions.https.onRequest((req, res) => {
-  users.handler(req, res, database);
-});
+const handleIfAuthorized = async (req, res, handler) => {
+  const authorizationHeader = req.get("Authorization");
 
-exports.beers = functions.https.onRequest((req, res) => {
-  beers.handler(req, res, database);
-});
+  if (authorizationHeader) {
+    const accessToken = authorizationHeader.split("Bearer ")[1];
 
-exports.collections = functions.https.onRequest((req, res) => {
-  collections.handler(req, res, database);
-});
+    try {
+      const user = await admin.auth().verifyIdToken(accessToken);
+      // TODO Check roles
+      await handler(req, res, user, database);
+      return;
+    } catch (err) {
+      res.status(401).send(err);
+      return;
+    }
+  }
+
+  res.status(401).send("Unauthorized");
+};
+
+exports.users = functions.https.onRequest((req, res) =>
+  handleIfAuthorized(req, res, users.handler)
+);
+
+exports.beers = functions.https.onRequest((req, res) =>
+  handleIfAuthorized(req, res, beers.handler)
+);
+
+exports.collections = functions.https.onRequest((req, res) =>
+  handleIfAuthorized(req, res, collections.handler)
+);
