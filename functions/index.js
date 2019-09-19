@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+const initializeGraphqlServer = require("./graphql/server");
 const users = require("./users");
 const beers = require("./beers");
 const collections = require("./collections");
@@ -14,12 +15,12 @@ admin.initializeApp({
 
 const database = admin.database();
 
+const graphqlServer = initializeGraphqlServer();
+
 const handleIfAuthorized = async (req, res, handler) => {
-  const authorizationHeader = req.get("Authorization");
+  const accessToken = req.get("Authorization");
 
-  if (authorizationHeader) {
-    const accessToken = authorizationHeader.split("Bearer ")[1];
-
+  if (accessToken) {
     try {
       const user = await admin.auth().verifyIdToken(accessToken);
       // TODO Check roles
@@ -33,6 +34,8 @@ const handleIfAuthorized = async (req, res, handler) => {
 
   res.status(401).send("Unauthorized");
 };
+
+exports.graphql = functions.https.onRequest(graphqlServer);
 
 exports.users = functions.https.onRequest((req, res) =>
   handleIfAuthorized(req, res, users.handler)

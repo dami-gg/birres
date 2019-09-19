@@ -17,10 +17,13 @@ const Provider = ({ children }) => {
   const [user, setUser] = useState(getSessionCookie());
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(response => {
-      if (response) {
-        setUser(response);
-        setSessionCookie(response);
+    const unsubscribe = auth.onAuthStateChanged(async authUser => {
+      if (authUser) {
+        const token = await auth.currentUser.getIdToken();
+
+        setUser(authUser);
+        sessionStorage.setItem("TOKEN", token);
+        setSessionCookie(authUser);
         completeAuthentication();
       } else {
         setUser(null);
@@ -78,6 +81,7 @@ const Provider = ({ children }) => {
 
       setUser(null);
       removeSessionCookie();
+      sessionStorage.removeItem("TOKEN");
     } catch (err) {
       // TODO Handle error
     }

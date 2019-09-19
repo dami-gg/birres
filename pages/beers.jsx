@@ -2,9 +2,11 @@ import React from "react";
 
 import ProtectedPage from "./_protected";
 
+import Beers from "../src/components/beers/Beers";
+
 const BeersPage = () => (
   <ProtectedPage>
-    <p>You are authorized to see this page</p>
+    <Beers />
   </ProtectedPage>
 );
 

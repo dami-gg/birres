@@ -3,9 +3,10 @@ import App from "next/app";
 
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { ApolloProvider } from "@apollo/react-hooks";
 
 import { AuthContextProvider } from "../src/context";
-
+import apolloClient from "../src/helpers/apollo-client";
 import theme from "../src/theme";
 
 class MyApp extends App {
@@ -21,12 +22,14 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AuthContextProvider>
-          <Component {...pageProps} />
-        </AuthContextProvider>
-      </ThemeProvider>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AuthContextProvider>
+            <Component {...pageProps} />
+          </AuthContextProvider>
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
