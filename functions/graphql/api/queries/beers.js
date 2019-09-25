@@ -1,18 +1,11 @@
-const fetch = require("node-fetch");
+const { getAllBeersFromDatabase } = require("../../../database-operations");
+const { logger } = require("../../../helpers");
 
-const { getApiRequestOptions } = require("./queries.helpers.js");
-
-const { getFunctionsUrl, logger } = require("../../../helpers");
-
-const getAllBeers = async (args, context) => {
+const getAllBeers = async () => {
   try {
-    const response = await fetch(
-      `${getFunctionsUrl()}/beers`,
-      getApiRequestOptions({ context })
-    );
-
+    const response = await getAllBeersFromDatabase();
     logger.debug("api/getAllBeers", "successfully fetched a list of beers");
-    return await response.json();
+    return response;
   } catch (err) {
     logger.error(
       "api/getAllBeers",

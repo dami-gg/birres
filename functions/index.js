@@ -13,8 +13,6 @@ admin.initializeApp({
   databaseURL: "https://beer-collection.firebaseio.com"
 });
 
-const database = admin.database();
-
 const graphqlServer = initializeGraphqlServer();
 
 const handleIfAuthorized = async (req, res, handler) => {
@@ -24,7 +22,7 @@ const handleIfAuthorized = async (req, res, handler) => {
     try {
       const user = await admin.auth().verifyIdToken(accessToken);
       // TODO Check roles
-      await handler(req, res, user, database);
+      await handler(req, res, user);
       return;
     } catch (err) {
       res.status(401).send(err);

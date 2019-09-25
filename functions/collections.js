@@ -1,14 +1,12 @@
+const { getUserCollection } = require("./database-operations");
 const { logger } = require("./helpers");
 
-exports.handler = async (req, res, user, database) => {
+exports.handler = async (req, res, { user_id: userId }) => {
   let statusCode = 200;
   let response;
 
   try {
-    const snapshot = await database
-      .ref(`collections/${user.user_id}`)
-      .once("value");
-    response = snapshot.val();
+    response = await getUserCollection(userId);
   } catch (err) {
     logger.error("collections", `could not get a valid response due to ${err}`);
     statusCode = 500;
