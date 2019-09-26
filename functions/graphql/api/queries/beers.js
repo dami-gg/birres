@@ -15,6 +15,11 @@ const getAllBeers = async () => {
   }
 };
 
+const getBeerById = async () => {
+  return {};
+};
+
 module.exports = {
-  getAllBeers
+  getAllBeers,
+  getBeerById
 };

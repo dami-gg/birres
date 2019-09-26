@@ -1,18 +1,46 @@
-const { getUserCollection } = require("../../../database-operations");
+const {
+  getUserCollection,
+  getBatchedBeers
+} = require("../../../database-operations");
 const { logger } = require("../../../helpers");
 
 const getCollection = async ({ user: { user_id: userId } }) => {
+  let collection;
+
   try {
-    const response = await getUserCollection(userId);
+    collection = await getUserCollection(userId);
     logger.debug(
       "api/getCollection",
       `successfully fetched collection of user ${userId}`
     );
-    return response;
   } catch (err) {
     logger.error(
       "api/getCollection",
       `could not get collection of user ${userId} due to ${err}`
+    );
+    return [];
+  }
+
+  const beerIds = Object.keys(collection);
+
+  try {
+    const beers = await getBatchedBeers(beerIds);
+
+    const extendedCollection = beers.map(beer => ({
+      ...beer,
+      ...collection[beer.id]
+    }));
+
+    logger.debug(
+      "api/getCollection",
+      `successfully fetched extended beers information for collection of user ${userId}`
+    );
+
+    return extendedCollection;
+  } catch (err) {
+    logger.error(
+      "api/getCollection",
+      `could not get extended beers information for collection of user ${userId} due to ${err}`
     );
     return [];
   }

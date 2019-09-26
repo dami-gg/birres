@@ -10,6 +10,24 @@ const getAllBeersFromDatabase = async () => {
   return Object.keys(value).map(key => value[key]);
 };
 
+const getBatchedBeers = async beerIds => {
+  const beers = [];
+
+  const snapshot = await admin
+    .database()
+    .ref(`beers`)
+    .once("value");
+
+  snapshot.forEach(childSnapshot => {
+    if (beerIds.includes(childSnapshot.key)) {
+      beers.push(childSnapshot.val());
+    }
+  });
+
+  return beers;
+};
+
 module.exports = {
-  getAllBeersFromDatabase
+  getAllBeersFromDatabase,
+  getBatchedBeers
 };

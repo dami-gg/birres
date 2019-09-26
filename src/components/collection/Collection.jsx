@@ -2,12 +2,10 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
 
-import BeerGrid from "./BeerGrid";
-import { GET_ALL_BEERS } from "../../queries";
+import BeerGrid from "../beers/BeerGrid";
+import { GET_USER_COLLECTION } from "../../queries";
 
 import Spinner from "../spinner/Spinner";
-
-const BEERS_PER_PAGE = 20;
 
 const useStyles = makeStyles({
   beers: {
@@ -15,11 +13,10 @@ const useStyles = makeStyles({
   }
 });
 
-const Beers = () => {
+const Collection = () => {
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GET_ALL_BEERS, {
-    variables: { skip: 0, first: BEERS_PER_PAGE },
+  const { loading, error, data } = useQuery(GET_USER_COLLECTION, {
     notifyOnNetworkStatusChange: true
   });
 
@@ -33,13 +30,13 @@ const Beers = () => {
     return <p>ERROR</p>;
   }
 
-  const beers = data && data.allBeers ? data.allBeers : [];
+  const beers = data && data.userCollection ? data.userCollection : [];
 
   return (
     <div className={classes.beers}>
-      <BeerGrid beers={beers} isPrivate={false} />
+      <BeerGrid beers={beers} isPrivate />
     </div>
   );
 };
 
-export default Beers;
+export default Collection;
