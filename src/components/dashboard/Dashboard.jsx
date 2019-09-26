@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 
-import { DASHBOARD_OPTIONS } from "./dashboard.constants";
+import { SECTIONS } from "../../constants";
 
 const useStyles = makeStyles({
   dashboard: {
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
   return (
     <div className={classes.dashboard}>
-      {DASHBOARD_OPTIONS.map(({ title, url, image }, index) => (
+      {SECTIONS.map(({ title, url, image }, index) => (
         <Link
           // eslint-disable-next-line react/no-array-index-key
           key={index}

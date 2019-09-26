@@ -1,4 +1,4 @@
-const DASHBOARD_OPTIONS = [
+const SECTIONS = [
   {
     title: "Add a new beer",
     url: "/add-beer",
@@ -17,7 +17,7 @@ const DASHBOARD_OPTIONS = [
   {
     title: "See catalog of beers",
     url: "/beers",
-    image: ""
+    image: "/static/images/fridge.png"
   },
   {
     title: "See statistics",
@@ -33,4 +33,4 @@ const DASHBOARD_OPTIONS = [
   }
 ];
 
-export { DASHBOARD_OPTIONS };
+export { SECTIONS };

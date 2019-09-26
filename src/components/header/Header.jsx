@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Header = () => {
+const Header = ({ onSidebarToggle }) => {
   const classes = useStyles();
   const { user, signout } = useContext(AuthContext);
 
@@ -39,6 +40,7 @@ const Header = () => {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={onSidebarToggle}
           >
             <MenuIcon />
           </IconButton>
@@ -58,6 +60,14 @@ const Header = () => {
       </AppBar>
     </div>
   );
+};
+
+Header.propTypes = {
+  onSidebarToggle: PropTypes.func
+};
+
+Header.defaultProps = {
+  onSidebarToggle: () => {}
 };
 
 export default Header;

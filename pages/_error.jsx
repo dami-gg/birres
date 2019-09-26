@@ -41,7 +41,7 @@ ErrorPage.getInitialProps = ({ res, err }) => {
 };
 
 ErrorPage.propTypes = {
-  statusCode: PropTypes.string
+  statusCode: PropTypes.number
 };
 
 ErrorPage.defaultProps = {
