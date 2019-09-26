@@ -31,11 +31,6 @@ const getCollection = async ({ user: { user_id: userId } }) => {
       ...collection[beer.id]
     }));
 
-    logger.debug(
-      "api/getCollection",
-      `successfully fetched extended beers information for collection of user ${userId}`
-    );
-
     return extendedCollection;
   } catch (err) {
     logger.error(
