@@ -8,10 +8,10 @@ exports.handler = async (req, res) => {
   try {
     response = await getAllBeersFromDatabase();
   } catch (err) {
-    logger.error("beers", `could not get a valid response due to ${err}`);
+    logger.error(`[beers]: could not get a valid response due to ${err}`);
     statusCode = 500;
   }
 
-  logger.debug("beers", `responding with ${statusCode} status code`);
+  logger.debug(`[beers]: responding with ${statusCode} status code`);
   res.status(statusCode).send(response);
 };

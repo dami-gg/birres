@@ -10,13 +10,11 @@ const getCollection = async ({ user: { user_id: userId } }) => {
   try {
     collection = await getUserCollection(userId);
     logger.debug(
-      "api/getCollection",
-      `successfully fetched collection of user ${userId}`
+      `[api/getCollection]: successfully fetched collection of user ${userId}`
     );
   } catch (err) {
     logger.error(
-      "api/getCollection",
-      `could not get collection of user ${userId} due to ${err}`
+      `[api/getCollection]: could not get collection of user ${userId} due to ${err}`
     );
     return [];
   }
@@ -31,11 +29,14 @@ const getCollection = async ({ user: { user_id: userId } }) => {
       ...collection[beer.id]
     }));
 
+    logger.debug(
+      `[api/getCollection]: successfully fetched extended beers information for collection of user ${userId}`
+    );
+
     return extendedCollection;
   } catch (err) {
     logger.error(
-      "api/getCollection",
-      `could not get extended beers information for collection of user ${userId} due to ${err}`
+      `[api/getCollection]: could not get extended beers information for collection of user ${userId} due to ${err}`
     );
     return [];
   }

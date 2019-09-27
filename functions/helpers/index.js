@@ -1,5 +1,5 @@
 const { isEmulator, isProduction, getFunctionsUrl } = require("./environment");
-const { logger } = require("./logger");
+const logger = require("./logger");
 
 module.exports = {
   isEmulator,

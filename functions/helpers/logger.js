@@ -1,27 +1,18 @@
-const { Logging } = require("@google-cloud/logging");
+const winston = require("winston");
+const { isProduction } = require("./environment");
 
-const logging = new Logging();
-
-const log = logging.log("functions-log");
-
-const getMetadata = functionName => ({
-  resource: {
-    type: "cloud_function",
-    labels: {
-      function_name: functionName
-    }
-  }
+const logger = winston.createLogger({
+  level: "debug",
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console({ level: "debug" })]
 });
 
-const logger = {
-  debug: (functionName, message = "") => {
-    const entry = log.entry(getMetadata(functionName), `debug: ${message}`);
-    log.write(entry);
-  },
-  error: (functionName, message = "") => {
-    const entry = log.entry(getMetadata(functionName), `error: ${message}`);
-    log.write(entry);
-  }
-};
+if (!isProduction()) {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple()
+    })
+  );
+}
 
-module.exports = { logger };
+module.exports = logger;

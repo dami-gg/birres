@@ -8,10 +8,10 @@ exports.handler = async (req, res, { user_id: userId }) => {
   try {
     response = await getUserCollection(userId);
   } catch (err) {
-    logger.error("collections", `could not get a valid response due to ${err}`);
+    logger.error(`[collections]: could not get a valid response due to ${err}`);
     statusCode = 500;
   }
 
-  logger.debug("collections", `responding with ${statusCode} status code`);
+  logger.debug(`[collections]: responding with ${statusCode} status code`);
   res.status(statusCode).send(response);
 };
