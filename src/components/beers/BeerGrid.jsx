@@ -17,7 +17,7 @@ const BeerGrid = ({ beers = [], isPrivate = false }) => {
     <div className={classes.beers}>
       <Grid container spacing={3}>
         {beers.map(beer => (
-          <Grid key={beer.id} item xs={3}>
+          <Grid key={beer.id} item xs={12} sm={6} md={4} lg={2} xl={1}>
             <BeerCard beer={beer} isPrivate={isPrivate} />
           </Grid>
         ))}

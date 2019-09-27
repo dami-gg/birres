@@ -3,64 +3,53 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 
-import BeerCardActions from "./BeerCardActions";
+import BeerCardDescription from "./BeerCardDescription";
 
 const placeholderLabelSrc = "/static/images/label.png";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 345
+    display: "grid",
+    gridTemplateColumns: "2.5fr 5.5fr",
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+      flexDirection: "column",
+      maxWidth: 350
+    }
   },
   media: {
-    height: 140
-  },
-  rating: {
-    width: "100%",
-    textAlign: "center"
-  },
-  filledHeart: {
-    color: "red"
-  },
-  unfilledHeart: {
-    color: "white"
-  },
-  actions: {
-    justifyContent: "space-between"
+    width: 150,
+    [theme.breakpoints.up("sm")]: {
+      height: 140,
+      width: "auto"
+    }
   }
-});
+}));
 
-const BeerCard = ({ beer, isPrivate = false }) => {
+const BeerCard = ({ beer, isInCollection = false }) => {
   const classes = useStyles();
 
-  const { name, type, origin, image } = beer;
+  const { name, image } = beer;
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image || placeholderLabelSrc}
-          title={`Logo of ${name}`}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h6" noWrap>
-            {name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {type}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {origin}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <CardMedia
+        className={classes.media}
+        image={image || placeholderLabelSrc}
+        title={`Logo of ${name}`}
+      />
 
-      <BeerCardActions beer={beer} showRatings={isPrivate} />
+      <CardContent>
+        <Typography gutterBottom variant="h6" noWrap>
+          {name}
+        </Typography>
+
+        <BeerCardDescription beer={beer} isInCollection={isInCollection} />
+      </CardContent>
     </Card>
   );
 };
@@ -74,11 +63,11 @@ BeerCard.propTypes = {
     rating: PropTypes.number,
     image: PropTypes.string
   }).isRequired,
-  isPrivate: PropTypes.bool
+  isInCollection: PropTypes.bool
 };
 
 BeerCard.defaultProps = {
-  isPrivate: false
+  isInCollection: false
 };
 
 export default BeerCard;
