@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
 
 import BeerGrid from "../beers/BeerGrid";
-import { GET_USER_COLLECTION } from "../../queries";
+import { GET_USER_COLLECTION } from "../../data/queries";
 
 import Spinner from "../spinner/Spinner";
 
@@ -30,11 +30,11 @@ const Collection = () => {
     return <p>ERROR</p>;
   }
 
-  const beers = data && data.userCollection ? data.userCollection : [];
+  const collection = data && data.userCollection ? data.userCollection : [];
 
   return (
     <div className={classes.beers}>
-      <BeerGrid beers={beers} isPrivate />
+      <BeerGrid beers={collection} isCollection />
     </div>
   );
 };

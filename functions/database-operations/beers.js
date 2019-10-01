@@ -27,7 +27,17 @@ const getBatchedBeers = async beerIds => {
   return beers;
 };
 
+const getBeer = async beerId => {
+  const snapshot = await admin
+    .database()
+    .ref(`beers/${beerId}`)
+    .once("value");
+
+  return snapshot.val();
+};
+
 module.exports = {
   getAllBeersFromDatabase,
-  getBatchedBeers
+  getBatchedBeers,
+  getBeer
 };

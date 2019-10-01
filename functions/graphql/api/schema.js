@@ -3,8 +3,13 @@ const { gql } = require("apollo-server-express");
 const schema = gql(`
     type Query {
         allBeers: [Beer]
+        catalog: [Beer]
         beer(id: ID!): Beer
-        userCollection: [CollectionBeer]
+        userCollection: [Beer]
+    }
+    type Mutation {
+        addBeerToCollection(id: ID!): Beer
+        removeBeerFromCollection(id: ID!): Beer
     }
     type Beer {
         id: ID!
@@ -12,14 +17,16 @@ const schema = gql(`
         type: String
         origin: String
         image: String
-    }
-    type CollectionBeer {
-        id: ID!
-        name: String
-        type: String
-        origin: String
         rating: Int
-        image: String
+        collected: Boolean
+        isOptimistic: Boolean
+    }
+    type Notification {
+        type: String
+        message: String
+    }
+    type CollectionChangePayload {
+        notification: Notification
     }
 `);
 

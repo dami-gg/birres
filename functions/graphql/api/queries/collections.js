@@ -26,7 +26,8 @@ const getCollection = async ({ user: { user_id: userId } }) => {
 
     const extendedCollection = beers.map(beer => ({
       ...beer,
-      ...collection[beer.id]
+      ...collection[beer.id],
+      collected: true
     }));
 
     logger.debug(

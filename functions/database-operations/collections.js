@@ -9,6 +9,36 @@ const getUserCollection = async userId => {
   return snapshot.val();
 };
 
+const setCollectionBeer = async (userId, beerId) => {
+  try {
+    await admin
+      .database()
+      .ref(`collections/${userId}/${beerId}`)
+      .set({
+        rating: -1
+      });
+
+    return Promise.resolve();
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+const removeCollectionBeer = async (userId, beerId) => {
+  try {
+    await admin
+      .database()
+      .ref(`collections/${userId}/${beerId}`)
+      .remove();
+
+    return Promise.resolve();
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
 module.exports = {
-  getUserCollection
+  getUserCollection,
+  setCollectionBeer,
+  removeCollectionBeer
 };

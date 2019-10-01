@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { makeStyles } from "@material-ui/core/styles";
 
 import BeerGrid from "./BeerGrid";
-import { GET_ALL_BEERS } from "../../queries";
+import { GET_BEER_CATALOG } from "../../data/queries";
 
 import Spinner from "../spinner/Spinner";
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 const Beers = () => {
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GET_ALL_BEERS, {
+  const { loading, error, data } = useQuery(GET_BEER_CATALOG, {
     variables: { skip: 0, first: BEERS_PER_PAGE },
     notifyOnNetworkStatusChange: true
   });
@@ -33,11 +33,11 @@ const Beers = () => {
     return <p>ERROR</p>;
   }
 
-  const beers = data && data.allBeers ? data.allBeers : [];
+  const catalog = data && data.catalog ? data.catalog : [];
 
   return (
     <div className={classes.beers}>
-      <BeerGrid beers={beers} isPrivate={false} />
+      <BeerGrid beers={catalog} />
     </div>
   );
 };

@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import Rating from "@material-ui/lab/Rating";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteOutlinedIcon from "@material-ui/icons/FavoriteOutlined";
+
+import BeerCollectorButton from "./BeerCollectorButton";
 
 const useStyles = makeStyles({
   description: {
@@ -17,31 +16,27 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "7fr 1fr"
   },
+  attributes: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
   bottom: {
     width: "100%",
     textAlign: "center",
     marginTop: 12
-  },
-  filledHeart: {
-    color: "red"
-  },
-  unfilledHeart: {
-    color: "white"
   }
 });
 
-const BeerCardDescription = ({
-  beer: { type, origin, rating },
-  isInCollection = true
-}) => {
+const BeerCardDescription = ({ beer, showRating = false }) => {
   const classes = useStyles();
 
-  const showRating = rating !== undefined;
+  const { type, origin, rating } = beer;
 
   return (
     <div className={classes.description}>
       <div className={classes.top}>
-        <div>
+        <div className={classes.attributes}>
           <Typography variant="body2" color="textSecondary">
             {type}
           </Typography>
@@ -51,18 +46,7 @@ const BeerCardDescription = ({
           </Typography>
         </div>
 
-        {!showRating && (
-          <IconButton
-            className={classes.saveButton}
-            aria-label="Add to collection"
-          >
-            {isInCollection ? (
-              <FavoriteIcon className={classes.filledHeart} />
-            ) : (
-              <FavoriteOutlinedIcon />
-            )}
-          </IconButton>
-        )}
+        <BeerCollectorButton beer={beer} />
       </div>
 
       {showRating && (
@@ -81,13 +65,15 @@ BeerCardDescription.propTypes = {
     type: PropTypes.string,
     origin: PropTypes.string,
     rating: PropTypes.number,
-    image: PropTypes.string
+    image: PropTypes.string,
+    collected: PropTypes.bool,
+    isOptimistic: PropTypes.bool
   }).isRequired,
-  isInCollection: PropTypes.bool
+  showRating: PropTypes.bool
 };
 
 BeerCardDescription.defaultProps = {
-  isInCollection: false
+  showRating: false
 };
 
 export default BeerCardDescription;

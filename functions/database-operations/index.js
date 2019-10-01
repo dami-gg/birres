@@ -1,8 +1,19 @@
-const { getAllBeersFromDatabase, getBatchedBeers } = require("./beers");
-const { getUserCollection } = require("./collections");
+const {
+  getAllBeersFromDatabase,
+  getBatchedBeers,
+  getBeer
+} = require("./beers");
+const {
+  getUserCollection,
+  setCollectionBeer,
+  removeCollectionBeer
+} = require("./collections");
 
 module.exports = {
   getAllBeersFromDatabase,
   getBatchedBeers,
-  getUserCollection
+  getBeer,
+  getUserCollection,
+  setCollectionBeer,
+  removeCollectionBeer
 };

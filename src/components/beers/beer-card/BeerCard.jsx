@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BeerCard = ({ beer, isInCollection = false }) => {
+const BeerCard = ({ beer, showRating = false }) => {
   const classes = useStyles();
 
   const { name, image } = beer;
@@ -48,7 +48,7 @@ const BeerCard = ({ beer, isInCollection = false }) => {
           {name}
         </Typography>
 
-        <BeerCardDescription beer={beer} isInCollection={isInCollection} />
+        <BeerCardDescription beer={beer} showRating={showRating} />
       </CardContent>
     </Card>
   );
@@ -63,11 +63,11 @@ BeerCard.propTypes = {
     rating: PropTypes.number,
     image: PropTypes.string
   }).isRequired,
-  isInCollection: PropTypes.bool
+  showRating: PropTypes.bool
 };
 
 BeerCard.defaultProps = {
-  isInCollection: false
+  showRating: false
 };
 
 export default BeerCard;

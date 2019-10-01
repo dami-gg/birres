@@ -4,13 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Grid from "@material-ui/core/Grid";
 
-import BeerCard from "./BeerCard";
+import BeerCard from "./beer-card/BeerCard";
 
 const useStyles = makeStyles({
   beers: {}
 });
 
-const BeerGrid = ({ beers = [], isPrivate = false }) => {
+const BeerGrid = ({ beers = [], isCollection = false }) => {
   const classes = useStyles();
 
   return (
@@ -18,7 +18,7 @@ const BeerGrid = ({ beers = [], isPrivate = false }) => {
       <Grid container spacing={3}>
         {beers.map(beer => (
           <Grid key={beer.id} item xs={12} sm={6} md={4} lg={2} xl={1}>
-            <BeerCard beer={beer} isPrivate={isPrivate} />
+            <BeerCard beer={beer} showRating={isCollection} />
           </Grid>
         ))}
       </Grid>
@@ -28,12 +28,12 @@ const BeerGrid = ({ beers = [], isPrivate = false }) => {
 
 BeerGrid.propTypes = {
   beers: PropTypes.arrayOf(Object),
-  isPrivate: PropTypes.bool
+  isCollection: PropTypes.bool
 };
 
 BeerGrid.defaultProps = {
   beers: [],
-  isPrivate: false
+  isCollection: false
 };
 
 export default BeerGrid;

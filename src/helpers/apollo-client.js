@@ -38,6 +38,7 @@ const instantiateApolloClient = () =>
     connectToDevTools: process.browser,
     ssrMode: !process.browser,
     link: ApolloLink.from([getAuthLink(), getApolloHttpLink()]),
+    addTypename: true,
     cache: new InMemoryCache()
   });
 
