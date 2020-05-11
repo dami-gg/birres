@@ -9,11 +9,11 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    paddingTop: 30
+    paddingTop: 30,
   },
   image: {
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });
 
 const ErrorPage = ({ statusCode }) => {
@@ -21,11 +21,7 @@ const ErrorPage = ({ statusCode }) => {
 
   return (
     <div className={classes.errorPage}>
-      <img
-        className={classes.image}
-        src="/static/images/error.png"
-        alt="error"
-      />
+      <img className={classes.image} src="/images/error.png" alt="error" />
       <Typography variant="body1">
         {statusCode
           ? `An error ${statusCode} occurred on server`
@@ -41,11 +37,11 @@ ErrorPage.getInitialProps = ({ res, err }) => {
 };
 
 ErrorPage.propTypes = {
-  statusCode: PropTypes.number
+  statusCode: PropTypes.number,
 };
 
 ErrorPage.defaultProps = {
-  statusCode: 404
+  statusCode: 404,
 };
 
 export default ErrorPage;

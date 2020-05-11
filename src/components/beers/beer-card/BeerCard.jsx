@@ -9,9 +9,9 @@ import Typography from "@material-ui/core/Typography";
 
 import BeerCardDescription from "./BeerCardDescription";
 
-const placeholderLabelSrc = "/static/images/label.png";
+const placeholderLabelSrc = "/images/label.png";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     display: "grid",
     gridTemplateColumns: "2.5fr 5.5fr",

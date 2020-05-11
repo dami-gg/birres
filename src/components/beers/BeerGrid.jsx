@@ -16,7 +16,7 @@ const BeerGrid = ({ beers = [], isCollection = false }) => {
   return (
     <div className={classes.beers}>
       <Grid container spacing={3}>
-        {beers.map(beer => (
+        {beers.map((beer) => (
           <Grid key={beer.id} item xs={12} sm={6} md={4} lg={2} xl={1}>
             <BeerCard beer={beer} showRating={isCollection} />
           </Grid>
