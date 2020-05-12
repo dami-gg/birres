@@ -36,3 +36,12 @@ In development mode the application port is configured to `3000` and the clound 
 
 * `yarn start` to start the cloud functions server
 * Cloud functions will run on `http://localhost:5000`
+
+## Tests
+
+* `yarn test` to run all tests once
+* `yarn test:watch` to run all tests in watch mode
+
+### Code Coverage
+
+* `yarn test:coverage` to run tests and get code coverage report (accessible by `open build/coverage/index.html`)

@@ -8,7 +8,10 @@
     "dev": "next",
     "lint": "eslint src --ext js,jsx",
     "lint:fix": "npm run lint -- --fix",
-    "start": "serve ./out"
+    "start": "serve ./out",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "author": "Dami",
   "license": "MIT",
@@ -40,6 +43,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@testing-library/react": "^10.0.4",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -49,6 +53,7 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^26.0.1",
     "webpack": "^4.43.0"
   }
 }
