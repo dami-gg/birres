@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "next build && next export",
-    "dev": "next",
+    "dev": "(cd functions && npm run dev) & npm run start:dev",
     "lint": "eslint src --ext js,jsx",
     "lint:fix": "npm run lint -- --fix",
     "start": "serve ./out",
+    "start:dev": "next",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
@@ -35,7 +36,7 @@
     "graphql-tag": "^2.10.3",
     "isomorphic-unfetch": "^3.0.0",
     "js-cookie": "^2.2.1",
-    "next": "^9.3.6",
+    "next": "^9.4.0",
     "next-cookies": "^2.0.3",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",

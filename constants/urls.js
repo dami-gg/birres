@@ -1,5 +1,5 @@
 const LOCALHOST_FUNCTIONS_URL_DOMAIN =
-  "http://localhost:5000/beer-collection/us-central1";
+  "http://localhost:5001/beer-collection/us-central1";
 
 const PRODUCTION_FUNCTIONS_URL_DOMAIN =
   "https://us-central1-beer-collection.cloudfunctions.net";

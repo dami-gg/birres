@@ -29,13 +29,25 @@ Install dependencies for both the main application and the cloud functions
 
 ### Run
 
-In development mode the application port is configured to `3000` and the clound functions to port `5000`
+In development mode the application port is configured to `3000` and the clound functions to port `5001`
 
-* `yarn dev` to start the application server
+* `yarn start:dev` to start the application server
 * Server will run on `http://localhost:3000`
 
-* `yarn start` to start the cloud functions server
-* Cloud functions will run on `http://localhost:5000`
+* `cd functions && yarn dev` to start the cloud functions server
+* Cloud functions will run on `http://localhost:5001`
+
+You can also execute both together with the following command from the project root:
+
+* `yarn dev`
+
+### Debug
+
+A graphql playground can be found in local environments under:
+
+`http://localhost:5001/beer-collection/us-central1/graphql`
+
+To be able to execute queries in it, a JWT token must be set as HTTP header in the format: `Authorization: Bearer <token>`
 
 ## Tests
 

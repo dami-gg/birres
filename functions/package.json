@@ -6,6 +6,7 @@
   },
   "scripts": {
     "deploy": "firebase deploy --only functions",
+    "dev": "firebase emulators:start --only functions",
     "logs": "firebase functions:log",
     "reauth": "firebase login --reauth",
     "serve": "firebase serve --only functions",
