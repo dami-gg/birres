@@ -1,4 +1,5 @@
 const {
+  createBeer,
   getAllBeersFromDatabase,
   getBatchedBeers,
   getBeer
@@ -10,6 +11,7 @@ const {
 } = require("./collections");
 
 module.exports = {
+  createBeer,
   getAllBeersFromDatabase,
   getBatchedBeers,
   getBeer,

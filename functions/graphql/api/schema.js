@@ -6,10 +6,13 @@ const schema = gql(`
         catalog: [Beer]
         beer(id: ID!): Beer
         userCollection: [Beer]
+        allBeerTypes: [String]
+        allBeerOrigins: [String]
     }
     type Mutation {
         addBeerToCollection(id: ID!): Beer
         removeBeerFromCollection(id: ID!): Beer
+        createBeerInCollection(beer: BeerInput!): Beer
     }
     type Beer {
         id: ID!
@@ -27,6 +30,13 @@ const schema = gql(`
     }
     type CollectionChangePayload {
         notification: Notification
+    }
+    input BeerInput {
+        name: String!
+        type: String
+        origin: String
+        image: String
+        rating: String
     }
 `);
 

@@ -1,12 +1,15 @@
 const {
   getAllBeers,
   getAllBeersInUserContext,
+  getAllBeerOrigins,
+  getAllBeerTypes,
   getBeerById,
   getCollection
 } = require("./queries");
 const {
   addBeerToCollection,
-  removeBeerFromCollection
+  removeBeerFromCollection,
+  createBeerInCollection
 } = require("./mutations");
 
 const resolvers = {
@@ -22,6 +25,12 @@ const resolvers = {
     },
     userCollection(parent, args, context) {
       return getCollection(context);
+    },
+    allBeerTypes(parent, args, context) {
+      return getAllBeerTypes(context);
+    },
+    allBeerOrigins(parent, args, context) {
+      return getAllBeerOrigins(context);
     }
   },
   Mutation: {
@@ -30,6 +39,9 @@ const resolvers = {
     },
     removeBeerFromCollection(parent, args, context) {
       return removeBeerFromCollection(args, context);
+    },
+    createBeerInCollection(parent, args, context) {
+      return createBeerInCollection(args, context);
     }
   }
 };

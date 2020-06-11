@@ -1,5 +1,7 @@
-export {
+import {
   AuthContext,
-  Provider as AuthContextProvider,
-  Consumer as AuthContextConsumer
+  Consumer as AuthContextConsumer,
+  Provider as AuthContextProvider
 } from "./AuthContext";
+
+export { AuthContext, AuthContextConsumer, AuthContextProvider };

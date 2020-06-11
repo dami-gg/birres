@@ -1,3 +1,4 @@
+const { createBeerInCollection } = require("./beers");
 const {
   addBeerToCollection,
   removeBeerFromCollection
@@ -5,5 +6,6 @@ const {
 
 module.exports = {
   addBeerToCollection,
+  createBeerInCollection,
   removeBeerFromCollection
 };

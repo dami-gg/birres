@@ -33,7 +33,7 @@ const Beers = () => {
     return <p>ERROR</p>;
   }
 
-  const catalog = data && data.catalog ? data.catalog : [];
+  const catalog = data?.catalog ?? [];
 
   return (
     <div className={classes.beers}>

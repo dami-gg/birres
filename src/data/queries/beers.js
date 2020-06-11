@@ -22,4 +22,21 @@ const GET_BEER_CATALOG = gql`
   ${beerFragment}
 `;
 
-export { GET_ALL_BEERS, GET_BEER_CATALOG };
+const GET_ALL_BEER_TYPES = gql`
+  query allBeerTypes {
+    allBeerTypes
+  }
+`;
+
+const GET_ALL_BEER_ORIGINS = gql`
+  query allBeerOrigins {
+    allBeerOrigins
+  }
+`;
+
+export {
+  GET_ALL_BEERS,
+  GET_ALL_BEER_TYPES,
+  GET_BEER_CATALOG,
+  GET_ALL_BEER_ORIGINS
+};

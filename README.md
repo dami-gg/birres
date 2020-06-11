@@ -37,7 +37,7 @@ In development mode the application port is configured to `3000` and the clound 
 * `cd functions && yarn dev` to start the cloud functions server
 * Cloud functions will run on `http://localhost:5001`
 
-You can also execute both together with the following command from the project root:
+You can also execute both together with the following command from the project root directory:
 
 * `yarn dev`
 

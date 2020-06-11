@@ -4,7 +4,7 @@ const admin = require("firebase-admin");
 const schema = require("./api/schema");
 const resolvers = require("./api/resolvers");
 
-const { isEmulator } = require("../helpers");
+const { isEmulator, logger } = require("../helpers");
 
 const server = new ApolloServer({
   typeDefs: schema,
@@ -18,6 +18,7 @@ const server = new ApolloServer({
     try {
       user = await admin.auth().verifyIdToken(accessToken);
     } catch (err) {
+      logger.error("Could not authenticate user\n", err);
       throw new Error("You must be authenticated");
     }
 

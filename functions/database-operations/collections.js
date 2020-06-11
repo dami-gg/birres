@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 
-const getUserCollection = async userId => {
+const getUserCollection = async (userId) => {
   const snapshot = await admin
     .database()
     .ref(`collections/${userId}`)
@@ -9,14 +9,11 @@ const getUserCollection = async userId => {
   return snapshot.val();
 };
 
-const setCollectionBeer = async (userId, beerId) => {
+const setCollectionBeer = async (userId, { id: beerId, rating = -1 }) => {
   try {
-    await admin
-      .database()
-      .ref(`collections/${userId}/${beerId}`)
-      .set({
-        rating: -1
-      });
+    await admin.database().ref(`collections/${userId}/${beerId}`).set({
+      rating
+    });
 
     return Promise.resolve();
   } catch (err) {
@@ -26,10 +23,7 @@ const setCollectionBeer = async (userId, beerId) => {
 
 const removeCollectionBeer = async (userId, beerId) => {
   try {
-    await admin
-      .database()
-      .ref(`collections/${userId}/${beerId}`)
-      .remove();
+    await admin.database().ref(`collections/${userId}/${beerId}`).remove();
 
     return Promise.resolve();
   } catch (err) {

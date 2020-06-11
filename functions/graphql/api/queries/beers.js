@@ -29,7 +29,7 @@ const getAllBeersInUserContext = async ({ user: { user_id: userId } }) => {
       `[api/getAllBeersInUserContext]: successfully fetched collection of user ${userId}`
     );
 
-    return allBeers.map(beer => ({
+    return allBeers.map((beer) => ({
       ...beer,
       collected: userCollection.hasOwnProperty(beer.id) // eslint-disable-line no-prototype-builtins
     }));
@@ -45,8 +45,51 @@ const getBeerById = async () => {
   return {};
 };
 
+const getAllBeerTypes = async () => {
+  try {
+    const allBeers = await getAllBeersFromDatabase();
+    logger.debug("[api/getAllBeerTypes]: successfully fetched a list of beers");
+
+    return allBeers
+      .reduce(
+        (types, { type }) => (types.includes(type) ? types : [...types, type]),
+        []
+      )
+      .sort();
+  } catch (err) {
+    logger.error(
+      `[api/getAllBeerTypes]: could not get a list of beer types due to ${err}`
+    );
+    return [];
+  }
+};
+
+const getAllBeerOrigins = async () => {
+  try {
+    const allBeers = await getAllBeersFromDatabase();
+    logger.debug(
+      "[api/getAllBeerOrigins]: successfully fetched a list of beers"
+    );
+
+    return allBeers
+      .reduce(
+        (origins, { origin }) =>
+          origins.includes(origin) ? origins : [...origins, origin],
+        []
+      )
+      .sort();
+  } catch (err) {
+    logger.error(
+      `[api/getAllBeerOrigins]: could not get a list of beer origins due to ${err}`
+    );
+    return [];
+  }
+};
+
 module.exports = {
   getAllBeers,
   getAllBeersInUserContext,
+  getAllBeerOrigins,
+  getAllBeerTypes,
   getBeerById
 };

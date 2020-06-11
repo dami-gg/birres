@@ -21,11 +21,11 @@ const useStyles = makeStyles({
   }
 });
 
-const Spinner = ({ size = 50 }) => {
+const Spinner = ({ classNames, size = 50 }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.spinner}>
+    <div className={`${classes.spinner} ${classNames}`}>
       <div className={classes.circle}>
         <CircularProgress
           className={classes.progress}
@@ -38,10 +38,12 @@ const Spinner = ({ size = 50 }) => {
 };
 
 Spinner.propTypes = {
+  classNames: PropTypes.string,
   size: PropTypes.number
 };
 
 Spinner.defaultProps = {
+  classNames: "",
   size: 50
 };
 
